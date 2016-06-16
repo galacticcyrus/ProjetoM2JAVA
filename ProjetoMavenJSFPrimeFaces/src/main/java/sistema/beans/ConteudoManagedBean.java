@@ -43,13 +43,10 @@ public class ConteudoManagedBean {
 
 
 	public void salvar() {
-		if(disciplina != null){
+
 		disciplina.addConteudo(conteudo);
 		conteudo.setDisciplina(disciplina);
-		}
-		else{
-			conteudo.setDisciplina(new Disciplina());
-		}
+
 		conteudo = contDAO.save(conteudo);
 
 		if (conteudos != null)
@@ -87,9 +84,16 @@ public class ConteudoManagedBean {
 	
 	public List<Disciplina> getDisciplinasConteudos() {
 		if (conteudoSelecionada != null) {
-			return (List<Disciplina>)contService.pesquisarDisciplinaConteudo(conteudoSelecionada);
+			return contService.pesquisarDisciplinaConteudo(conteudoSelecionada);
 		} else
-			return null;
+		{
+			try{
+				return contService.pesquisarDisciplinaConteudo(null);
+			}
+			catch(Exception e){
+				return null;
+			}
+		}
 	}
 
 	public void onRowEdit(RowEditEvent event) {

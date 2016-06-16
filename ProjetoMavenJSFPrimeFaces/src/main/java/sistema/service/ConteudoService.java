@@ -3,6 +3,7 @@ package sistema.service;
 import java.util.List;
 
 import sistema.dao.ConteudoDAO;
+import sistema.dao.DisciplinaDAO;
 import sistema.modelos.Conteudo;
 import sistema.modelos.Disciplina;
 
@@ -39,13 +40,17 @@ public class ConteudoService {
 			}
 		}
 		
-		public Disciplina pesquisarDisciplinaConteudo(Conteudo conteudo) {
+		public List<Disciplina> pesquisarDisciplinaConteudo(Conteudo conteudo) {
 
-			Disciplina disciplinas;
-
+			DisciplinaDAO dDAO = new DisciplinaDAO();
+			List<Disciplina> disciplinas = null;
+			if(conteudo!=null){
 			conteudo = conteudoDAO.getById(Conteudo.class, conteudo.getId());
-			disciplinas = conteudo.getDisciplina();
-
+			disciplinas.add(conteudo.getDisciplina());
+			}
+			else{
+				disciplinas = dDAO.getAll(Disciplina.class);
+			}
 			return disciplinas;
 		}
 }

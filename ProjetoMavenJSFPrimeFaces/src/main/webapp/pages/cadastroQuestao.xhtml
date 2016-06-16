@@ -22,7 +22,7 @@
 	  <p:outputLabel value="#{msg['pages.cadastroQuestao.conteudo']}" />
       <p:selectOneMenu value="#{questaoManagedBean.conteudo}" converter="converterConteudo">
 				<f:selectItem itemValue="" itemLabel="#{msg['pages.cadastroQuestao.conteudo.msg']}" />
-				<f:selectItems value="#{questaoManagedBean.conteudo}" var="aux"
+				<f:selectItems value="#{questaoManagedBean.questoesConteudo}" var="aux"
 					itemValue="#{aux}" itemLabel="#{aux.nome}" />
 			</p:selectOneMenu>
       <p:outputLabel value="#{msg['pages.cadastroQuestao.dificuldade']}" />

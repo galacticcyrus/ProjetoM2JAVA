@@ -19,8 +19,13 @@
 	  
 	  <h:form id="formConteudo">	
 	  <p:panelGrid columns="2">
-
-
+	  
+ 		<p:outputLabel value="#{msg['pages.cadastroConteudo.disciplina.msg']}" />
+            <p:selectOneMenu value="#{conteudoManagedBean.disciplina}" converter="converterDisciplina">
+				<f:selectItem itemValue="" itemLabel="#{msg['pages.cadastroConteudo.disciplina.msg']}" />
+				<f:selectItems value="#{conteudoManagedBean.disciplinasConteudos}" var="aux"
+					itemValue="#{aux}" itemLabel="#{aux.nome}" />
+			</p:selectOneMenu>
       
       <p:outputLabel value="#{msg['pages.cadastroConteudo.nome']}" />
       <p:inputText value="#{conteudoManagedBean.conteudo.nome}"/>

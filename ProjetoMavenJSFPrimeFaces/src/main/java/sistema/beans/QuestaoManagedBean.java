@@ -11,6 +11,7 @@ import javax.faces.model.DataModel;
 
 import org.primefaces.event.RowEditEvent;
 import org.primefaces.event.SelectEvent;
+
 //import sistema.beans.datamodel.QuestaoDataModel;
 import sistema.dao.QuestaoDAO;
 import sistema.modelos.Prova;
@@ -24,6 +25,7 @@ import sistema.beans.converter.QuestaoConverter;
 @ViewScoped
 public class QuestaoManagedBean {
 	private Questao questao = new Questao();
+	private Questao questaoSelecionada;
 	private QuestaoDAO questaoDAO = new QuestaoDAO();
 	private QuestaoService questaoService = new QuestaoService();
 	private ConteudoService conteudoService = new ConteudoService();
@@ -74,4 +76,18 @@ public class QuestaoManagedBean {
 		Questao q = ((Questao) event.getObject());
 		questaoService.alterar(q);
 	}
+	
+	public List<Conteudo> getQuestoesConteudo() {
+		if(questaoSelecionada != null)
+			return questaoService.pesquisarQuestoesConteudos(questaoSelecionada);
+		else{
+			try{
+			return questaoService.pesquisarQuestoesConteudos(null);
+			}
+			catch (Exception e){
+				return null;
+			}
+		}
+	}
+	
 }
