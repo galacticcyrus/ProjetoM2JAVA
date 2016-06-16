@@ -1,0 +1,108 @@
+package sistema.beans;
+
+import java.util.List;
+
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ViewScoped;
+
+import org.primefaces.event.RowEditEvent;
+
+import sistema.dao.ProvaDAO;
+import sistema.modelos.Conteudo;
+import sistema.modelos.Disciplina;
+import sistema.modelos.Prova;
+//import sistema.modelos.Questao;
+//import sistema.service.QuestaoService;
+//import sistema.service.DisciplinaService;
+import sistema.service.ProvaService;
+
+
+
+@ManagedBean(name = "provaManagedBean")
+@ViewScoped
+public class ProvaManagedBean {
+	private Prova prova = new Prova();
+	private ProvaDAO provaDAO = new ProvaDAO();
+	private ProvaService provaService = new ProvaService();
+	//private DisciplinaService disciplinaService = new DisciplinaService();
+	private List<Prova> provas;
+	//private List<Questao> questoes;
+	//private List<Disciplina> disciplinas;
+	private List<Conteudo> conteudos;
+	private Disciplina disciplina = new Disciplina();
+	private Prova provaSelecionada = null;
+	public void salvar() {
+		disciplina.addProva(prova);
+		prova.setDisciplina(disciplina);
+
+		prova = provaDAO.save(prova);
+
+		if (provas != null)
+			provas.add(prova);
+
+		prova = new Prova();
+		disciplina = null;
+
+	}
+
+
+	public Disciplina getDisciplina() {
+		return disciplina;
+	}
+	public List<Conteudo> getConteudos(){
+		return conteudos;
+	}
+	/*public void remove(Disciplina conteudo) {
+		prodService.remover(conteudo);
+		conteudos.remove(conteudo);
+	}*/
+
+	public Prova getProva() {
+		return prova;
+	}
+
+	public void setProva(Prova prova) {
+		this.prova = prova;
+	}
+
+	public List<Prova> getProvas() {
+		if (provas == null)
+			provas = provaService.getProvas();
+
+		return provas;
+	}
+
+	public void onRowEdit(RowEditEvent event) {
+
+		Prova p = ((Prova) event.getObject());
+		provaService.alterar(p);
+	}
+	
+	public List<Conteudo> getProvasConteudo() {
+		if(provaSelecionada != null)
+			return provaService.pesquisarProvasConteudos(provaSelecionada);
+		else{
+			try{
+			return provaService.pesquisarProvasConteudos(null);
+			}
+			catch (Exception e){
+				return null;
+			}
+		}
+	}
+	
+	
+	public List<Disciplina> getProvasDisciplina() {
+		if(provaSelecionada != null)
+			return provaService.pesquisarProvasDisciplina(provaSelecionada);
+		else{
+			try{
+			return provaService.pesquisarProvasDisciplina(null);
+			}
+			catch (Exception e){
+				return null;
+			}
+		}
+	}
+
+}

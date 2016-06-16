@@ -1,0 +1,184 @@
+
+<ui:composition template="templateMenu.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui2="http://java.sun.com/jsf/facelets"
+	xmlns:tm="http://java.sun.com/jsf/composite/terminal/1_0/components">
+	
+	<ui:define name="title">
+		<h:outputText value="#{msg['pages.cadastroQuestao.title']}" />
+	</ui:define>
+	
+
+	<ui:define name="principal">
+	  
+	  <h1><p:outputLabel value="#{msg['pages.cadastroQuestao.menu']}"/></h1>
+	  
+	  <h:form id="formQuestao">	
+	  <p:panelGrid columns="2">
+	  <p:outputLabel value="#{msg['pages.cadastroQuestao.conteudo']}" />
+      <p:selectOneMenu value="#{questaoManagedBean.conteudo}" converter="converterConteudo">
+				<f:selectItem itemValue="" itemLabel="#{msg['pages.cadastroQuestao.conteudo.msg']}" />
+				<f:selectItems value="#{questaoManagedBean.conteudo}" var="aux"
+					itemValue="#{aux}" itemLabel="#{aux.nome}" />
+			</p:selectOneMenu>
+      <p:outputLabel value="#{msg['pages.cadastroQuestao.dificuldade']}" />
+      <p:inputText value="#{questaoManagedBean.questao.dificuldade}"/>
+      <p:outputLabel value="#{msg['pages.cadastroQuestao.enunciado']}" />
+      <p:inputText value="#{questaoManagedBean.questao.enunciado}"/>
+      <p:outputLabel value="#{msg['pages.cadastroQuestao.resolucao']}" />
+      <p:inputText value="#{questaoManagedBean.questao.resolucao}"/>
+      <p:outputLabel value="#{msg['pages.cadastroQuestao.tempoEstimado']}" />
+      <p:inputText value="#{questaoManagedBean.questao.tempoEstimado}"/>
+      <p:outputLabel value="#{msg['pages.cadastroQuestao.tipoPergunta']}" />
+      <p:inputText value="#{questaoManagedBean.questao.tipoPergunta}"/>
+      <p:outputLabel value="#{msg['pages.cadastroQuestao.img']}" />
+      <p:inputText value="#{questaoManagedBean.questao.img}"/>  
+	  </p:panelGrid>
+	  <p:commandButton value="#{msg['pages.comuns.form.btnSalvar']}" 
+	                 action="#{questaoManagedBean.salvar}"
+	                 update=":formQuestao, :formTableQuestao:tabelaQuestao"
+	                 />
+       </h:form>
+
+   <br/>
+   
+   
+   <h3><p:outputLabel value="#{msg['pages.cadastroQuestao.tableTitle']}" /> </h3>
+   <h:form id="formTableQuestao">
+   
+    <p:dataTable
+                value="#{questaoManagedBean.questoes}"
+                var="aux"
+                id="tabelaQuestao"
+            
+                editable="true"
+            
+                paginator="true"
+                rows="5"
+                paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                rowsPerPageTemplate="5,10,15"
+                
+                emptyMessage="#{msg['pages.cadastroQuestao.filterMSG']}"
+                
+   >
+      
+      <p:ajax event="rowEdit" listener="#{questaoManagedBean.onRowEdit}" update="tabelaQuestao" />
+      
+      <p:column headerText="#{msg['pages.cadastroQuestao.id']}" filterBy="#{aux.id}">
+        <p:outputLabel value="#{aux.id}" />
+      </p:column>
+      
+      
+      
+      <p:column headerText="#{msg['pages.cadastroQuestao.conteudo']}" filterBy="#{aux.conteudo}">
+    
+    			<p:cellEditor>
+					<f:facet name="output">
+						<p:outputLabel value="#{aux.conteudo}" />
+					</f:facet>
+					<f:facet name="input">
+						<p:inputText id="questaoConteudo" value="#{aux.conteudo}"
+							style="width:100%" />
+					</f:facet>
+				</p:cellEditor>
+	  </p:column>
+	  
+	        <p:column headerText="#{msg['pages.cadastroQuestao.dificuldade']}" filterBy="#{aux.dificuldade}">
+    
+    			<p:cellEditor>
+					<f:facet name="output">
+						<p:outputLabel value="#{aux.dificuldade}" />
+					</f:facet>
+					<f:facet name="input">
+						<p:inputText id="questaoDificuldade" value="#{aux.dificuldade}"
+							style="width:100%" />
+					</f:facet>
+				</p:cellEditor>
+	  </p:column>
+    
+      <p:column headerText="#{msg['pages.cadastroQuestao.enunciado']}" filterBy="#{aux.enunciado}">
+     
+     			<p:cellEditor>
+					<f:facet name="output">
+						<p:outputLabel value="#{aux.enunciado}" />
+					</f:facet>
+					<f:facet name="input">
+						<p:inputText id="questaoEnunciado" value="#{aux.enunciado}"
+							style="width:100%" />
+					</f:facet>
+				</p:cellEditor>
+      </p:column>
+      
+            <p:column headerText="#{msg['pages.cadastroQuestao.resolucao']}" filterBy="#{aux.resolucao}">
+    
+    			<p:cellEditor>
+					<f:facet name="output">
+						<p:outputLabel value="#{aux.resolucao}" />
+					</f:facet>
+					<f:facet name="input">
+						<p:inputText id="questaoResolucao" value="#{aux.resolucao}"
+							style="width:100%" />
+					</f:facet>
+				</p:cellEditor>
+	  </p:column>
+	  
+	        <p:column headerText="#{msg['pages.cadastroQuestao.tempoEstimado']}" filterBy="#{aux.tempoEstimado}">
+    
+    			<p:cellEditor>
+					<f:facet name="output">
+						<p:outputLabel value="#{aux.tempoEstimado}" />
+					</f:facet>
+					<f:facet name="input">
+						<p:inputText id="questaoTempo" value="#{aux.tempoEstimado}"
+							style="width:100%" />
+					</f:facet>
+				</p:cellEditor>
+	  </p:column>
+	  
+	        <p:column headerText="#{msg['pages.cadastroQuestao.tipoPergunta']}" filterBy="#{aux.tipoPergunta}">
+    
+    			<p:cellEditor>
+					<f:facet name="output">
+						<p:outputLabel value="#{aux.tipoPergunta}" />
+					</f:facet>
+					<f:facet name="input">
+						<p:inputText id="questaoTipo" value="#{aux.tipoPergunta}"
+							style="width:100%" />
+					</f:facet>
+				</p:cellEditor>
+	  </p:column>
+	  
+	        <p:column headerText="#{msg['pages.cadastroQuestao.img']}" filterBy="#{aux.img}">
+    
+    			<p:cellEditor>
+					<f:facet name="output">
+						<p:outputLabel value="#{aux.img}" />
+					</f:facet>
+					<f:facet name="input">
+						<p:inputText id="questaoIMG" value="#{aux.img}"
+							style="width:100%" />
+					</f:facet>
+				</p:cellEditor>
+	  </p:column>
+      
+      <p:column style="width:70px" headerText="#{msg['pages.cadastroQuestao.optionTable']}">
+					
+					<p:rowEditor />
+					
+					<p:commandLink id="remover" styleClass="ui-icon ui-icon-trash"
+						style="text-align:center"
+						update="tabelaQuestao" />
+	  </p:column>
+      
+   </p:dataTable>	
+
+	</h:form>
+
+	
+   	   
+	</ui:define>
+</ui:composition>
