@@ -12,6 +12,7 @@ import javax.faces.model.DataModel;
 import org.primefaces.event.RowEditEvent;
 import org.primefaces.event.SelectEvent;
 import sistema.modelos.Disciplina;
+import sistema.modelos.Produto;
 import sistema.modelos.Conteudo;
 import sistema.modelos.Prova;
 import sistema.modelos.Questao;
@@ -47,7 +48,7 @@ public class ConteudoManagedBean {
 		disciplina.addConteudo(conteudo);
 		conteudo.setDisciplina(disciplina);
 
-		conteudo = contDAO.save(conteudo);
+		conteudo = contService.salvar(conteudo);
 
 		if (conteudos != null)
 			conteudos.add(conteudo);
@@ -55,6 +56,15 @@ public class ConteudoManagedBean {
 		conteudo = new Conteudo();
 		disciplina = null;
 
+		
+
+
+	}
+
+	
+
+	public void setDisciplina(Disciplina disciplina) {
+		this.disciplina = disciplina;
 	}
 
 
@@ -83,17 +93,7 @@ public class ConteudoManagedBean {
 	}
 	
 	public List<Disciplina> getDisciplinasConteudos() {
-		if (conteudoSelecionada != null) {
-			return contService.pesquisarDisciplinaConteudo(conteudoSelecionada);
-		} else
-		{
-			try{
-				return contService.pesquisarDisciplinaConteudo(null);
-			}
-			catch(Exception e){
-				return null;
-			}
-		}
+		return disciplinaService.getDisciplinas();
 	}
 
 	public void onRowEdit(RowEditEvent event) {

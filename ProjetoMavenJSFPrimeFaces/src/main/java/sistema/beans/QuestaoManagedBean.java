@@ -36,7 +36,7 @@ public class QuestaoManagedBean {
 	public void salvar() {
 		conteudo.addQuestao(questao);
 		questao.setConteudo(conteudo);
-		questao = questaoDAO.save(questao);
+		questao = questaoService.salvar(questao);
 
 		if (questoes != null)
 			questoes.add(questao);
@@ -78,16 +78,7 @@ public class QuestaoManagedBean {
 	}
 	
 	public List<Conteudo> getQuestoesConteudo() {
-		if(questaoSelecionada != null)
-			return questaoService.pesquisarQuestoesConteudos(questaoSelecionada);
-		else{
-			try{
-			return questaoService.pesquisarQuestoesConteudos(null);
-			}
-			catch (Exception e){
-				return null;
-			}
-		}
+		return conteudoService.getConteudos();
 	}
 	
 }

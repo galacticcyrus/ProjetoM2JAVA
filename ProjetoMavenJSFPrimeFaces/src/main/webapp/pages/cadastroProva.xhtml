@@ -121,11 +121,32 @@
 						<p:outputLabel value="#{aux.disciplina}" />
 					</f:facet>
 					<f:facet name="input">
-						<p:inputText id="provaDisciplina" value="#{aux.disciplina}"
-							style="width:100%" />
+						<p:selectOneMenu value="#{aux.disciplina}"
+							converter="converterDisciplina" style="width:100%">
+							<f:selectItem itemValue="" itemLabel="#{msg['pages.cadastrorProva.disciplina.msg']}" />
+							<f:selectItems value="#{provaManagedBean.disciplina}"
+								var="aux" itemValue="#{aux}" itemLabel="#{aux.nome}" />
+						</p:selectOneMenu>
 					</f:facet>
 				</p:cellEditor>
       </p:column>
+      
+      <p:column headerText="#{msg['pages.cadastroProva.conteudo']}" filterBy="#{aux.conteudo}">
+    
+    			<p:cellEditor>
+					<f:facet name="output">
+						<p:outputLabel value="#{aux.conteudo}" />
+					</f:facet>
+					<f:facet name="input">
+						<p:selectOneMenu value="#{aux.conteudo}"
+							converter="converterConteudo" style="width:100%">
+							<f:selectItem itemValue="" itemLabel="#{msg['pages.cadastroConteudo.disciplina.msg']}" />
+							<f:selectItems value="#{provaManagedBean.conteudos}"
+								var="aux" itemValue="#{aux}" itemLabel="#{aux.nome}" />
+						</p:selectOneMenu>
+					</f:facet>
+				</p:cellEditor>
+	  </p:column>
       
       <p:column style="width:70px" headerText="#{msg['pages.cadastroProva.optionTable']}">
 					

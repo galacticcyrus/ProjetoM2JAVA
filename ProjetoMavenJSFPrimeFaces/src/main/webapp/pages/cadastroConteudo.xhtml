@@ -7,121 +7,123 @@
 	xmlns:p="http://primefaces.org/ui"
 	xmlns:ui2="http://java.sun.com/jsf/facelets"
 	xmlns:tm="http://java.sun.com/jsf/composite/terminal/1_0/components">
-	
+
 	<ui:define name="title">
 		<h:outputText value="#{msg['pages.cadastroConteudo.title']}" />
 	</ui:define>
-	
+
 
 	<ui:define name="principal">
-	  
-	  <h1><p:outputLabel value="#{msg['pages.cadastroConteudo.menu']}"/></h1>
-	  
-	  <h:form id="formConteudo">	
-	  <p:panelGrid columns="2">
-	  
- 		<p:outputLabel value="#{msg['pages.cadastroConteudo.disciplina.msg']}" />
-            <p:selectOneMenu value="#{conteudoManagedBean.disciplina}" converter="converterDisciplina">
-				<f:selectItem itemValue="" itemLabel="#{msg['pages.cadastroConteudo.disciplina.msg']}" />
-				<f:selectItems value="#{conteudoManagedBean.disciplinasConteudos}" var="aux"
-					itemValue="#{aux}" itemLabel="#{aux.nome}" />
-			</p:selectOneMenu>
-      
-      <p:outputLabel value="#{msg['pages.cadastroConteudo.nome']}" />
-      <p:inputText value="#{conteudoManagedBean.conteudo.nome}"/>
-	  </p:panelGrid>
-	  <p:commandButton value="#{msg['pages.comuns.form.btnSalvar']}" 
-	                 action="#{conteudoManagedBean.salvar}"
-	                 update=":formConteudo, :formTableConteudo:tabelaConteudo"
-	                 />
-       </h:form>
 
-   <br/>
-   
-   
-   <h3><p:outputLabel value="#{msg['pages.cadastroConteudo.tableTitle']}" /> </h3>
-   <h:form id="formTableConteudo">
-   
-    <p:dataTable
-                value="#{conteudoManagedBean.conteudos}"
-                var="aux"
-                id="tabelaConteudo"
-            
-                editable="true"
-            
-                paginator="true"
-                rows="5"
-                paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
-                rowsPerPageTemplate="5,10,15"
-                
-                emptyMessage="#{msg['pages.cadastroConteudo.filterMSG']}"
-                
-   >
-      
-      <p:ajax event="rowEdit" listener="#{conteudoManagedBean.onRowEdit}" update="tabelaConteudo" />
-      
-      <p:column headerText="#{msg['pages.cadastroConteudo.id']}" filterBy="#{aux.id}">
-        <p:outputLabel value="#{aux.id}" />
-      </p:column>
-      
-      <p:column headerText="#{msg['pages.cadastroConteudo.nome']}" filterBy="#{aux.nome}">
-    
-    			<p:cellEditor>
-					<f:facet name="output">
-						<p:outputLabel value="#{aux.nome}" />
-					</f:facet>
-					<f:facet name="input">
-						<p:inputText id="conteudoNome" value="#{aux.nome}"
-							style="width:100%" />
-					</f:facet>
-				</p:cellEditor>
-	  </p:column>
-      
-      <p:column headerText="#{msg['pages.cadastroConteudo.disciplina']}" filterBy="#{aux.disciplina}">
-    
-    			<p:cellEditor>
-					<f:facet name="output">
-						<p:outputLabel value="#{aux.disciplina}" />
-					</f:facet>
-					<f:facet name="input">
-						<p:inputText id="conteudoDisciplina" value="#{aux.disciplina}"
-							style="width:100%" />
-					</f:facet>
-				</p:cellEditor>
-		
-				 </p:column>
+		<h1>
+			<p:outputLabel value="#{msg['pages.cadastroConteudo.menu']}" />
+		</h1>
 
-    
-      <p:column headerText="#{msg['pages.cadastroConteudo.questoes']}" filterBy="#{aux.questoes}">
-     
-     			<p:cellEditor>
-					<f:facet name="output">
-						<p:outputLabel value="#{aux.questoes}" />
-					</f:facet>
-					<f:facet name="input">
-						<p:inputText id="conteudoQuestoes" value="#{aux.questoes}"
-							style="width:100%" />
-					</f:facet>
-				</p:cellEditor>
-      </p:column>
-      
-      <p:column style="width:70px" headerText="#{msg['pages.cadastroConteudo.optionTable']}">
-					
+		<h:form id="formConteudo">
+			<p:panelGrid columns="2">
+
+				<p:outputLabel
+					value="#{msg['pages.cadastroConteudo.disciplina.msg']}" />
+				<p:selectOneMenu value="#{conteudoManagedBean.disciplina}"
+					converter="converterDisciplina">
+					<f:selectItem itemValue=""
+						itemLabel="#{msg['pages.cadastroConteudo.disciplina.msg']}" />
+					<f:selectItems value="#{conteudoManagedBean.disciplinasConteudos}"
+						var="aux" itemValue="#{aux}" itemLabel="#{aux.nome}" />
+				</p:selectOneMenu>
+
+				<p:outputLabel value="#{msg['pages.cadastroConteudo.nome']}" />
+				<p:inputText value="#{conteudoManagedBean.conteudo.nome}" />
+			</p:panelGrid>
+			<p:commandButton value="#{msg['pages.comuns.form.btnSalvar']}"
+				action="#{conteudoManagedBean.salvar}"
+				update=":formConteudo, :formTableConteudo:tabelaConteudo" />
+		</h:form>
+
+		<br />
+
+
+		<h3>
+			<p:outputLabel value="#{msg['pages.cadastroConteudo.tableTitle']}" />
+		</h3>
+		<h:form id="formTableConteudo">
+
+			<p:dataTable value="#{conteudoManagedBean.conteudos}" var="aux"
+				id="tabelaConteudo" editable="true" paginator="true" rows="5"
+				paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+				rowsPerPageTemplate="5,10,15"
+				emptyMessage="#{msg['pages.cadastroConteudo.filterMSG']}">
+
+				<p:ajax event="rowEdit" listener="#{conteudoManagedBean.onRowEdit}"
+					update="tabelaConteudo" />
+
+				<p:column headerText="#{msg['pages.cadastroConteudo.id']}"
+					filterBy="#{aux.id}">
+					<p:outputLabel value="#{aux.id}" />
+				</p:column>
+
+				<p:column headerText="#{msg['pages.cadastroConteudo.nome']}"
+					filterBy="#{aux.nome}">
+
+					<p:cellEditor>
+						<f:facet name="output">
+							<p:outputLabel value="#{aux.nome}" />
+						</f:facet>
+						<f:facet name="input">
+							<p:inputText id="conteudoNome" value="#{aux.nome}"
+								style="width:100%" />
+						</f:facet>
+					</p:cellEditor>
+				</p:column>
+
+				
+				<p:column headerText="#{msg['pages.cadastroConteudo.disciplina.msg']}">
+					<p:cellEditor>
+						<f:facet name="output">
+							<p:outputLabel value="#{aux.disciplina.nome}" />
+						</f:facet>
+						<f:facet name="input">
+						<p:selectOneMenu value="#{aux.disciplina}"
+							converter="converterDisciplina" style="width:100%">
+							<f:selectItem itemValue="" itemLabel="#{msg['pages.cadastroConteudo.disciplina.msg']}" />
+							<f:selectItems value="#{conteudoManagedBean.disciplina}"
+								var="aux" itemValue="#{aux}" itemLabel="#{aux.nome}" />
+						</p:selectOneMenu>
+						</f:facet>
+					</p:cellEditor>
+
+				</p:column>
+				
+				<p:column headerText="#{msg['pages.cadastroConteudo.questoes']}"
+					filterBy="#{aux.questoes}">
+
+					<p:cellEditor>
+						<f:facet name="output">
+							<p:outputLabel value="#{aux.questoes}" />
+						</f:facet>
+						<f:facet name="input">
+							<p:inputText id="conteudoQuestoes" value="#{aux.questoes}"
+								style="width:100%" />
+						</f:facet>
+					</p:cellEditor>
+				</p:column>
+
+				<p:column style="width:70px"
+					headerText="#{msg['pages.cadastroConteudo.optionTable']}">
+
 					<p:rowEditor />
-					
+
 					<p:commandLink id="remover" styleClass="ui-icon ui-icon-trash"
-						style="text-align:center"
+						style="text-align:center" update="tabelaConteudo" />
+				</p:column>
 
-						update="tabelaConteudo" />
-	  </p:column>
 
-      
-      
-   </p:dataTable>	
 
-	</h:form>
+			</p:dataTable>
 
-	
-   	   
+		</h:form>
+
+
+
 	</ui:define>
 </ui:composition>

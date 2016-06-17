@@ -11,9 +11,9 @@ import sistema.dao.ProvaDAO;
 import sistema.modelos.Conteudo;
 import sistema.modelos.Disciplina;
 import sistema.modelos.Prova;
-//import sistema.modelos.Questao;
-//import sistema.service.QuestaoService;
-//import sistema.service.DisciplinaService;
+import sistema.modelos.Questao;
+import sistema.service.DisciplinaService;
+import sistema.service.ConteudoService;
 import sistema.service.ProvaService;
 
 
@@ -24,7 +24,8 @@ public class ProvaManagedBean {
 	private Prova prova = new Prova();
 	private ProvaDAO provaDAO = new ProvaDAO();
 	private ProvaService provaService = new ProvaService();
-	//private DisciplinaService disciplinaService = new DisciplinaService();
+	private ConteudoService contService = new ConteudoService();
+	private DisciplinaService discService = new DisciplinaService();
 	private List<Prova> provas;
 	//private List<Questao> questoes;
 	//private List<Disciplina> disciplinas;
@@ -35,7 +36,7 @@ public class ProvaManagedBean {
 		disciplina.addProva(prova);
 		prova.setDisciplina(disciplina);
 
-		prova = provaDAO.save(prova);
+		prova = provaService.salvar(prova);
 
 		if (provas != null)
 			provas.add(prova);
@@ -79,30 +80,12 @@ public class ProvaManagedBean {
 	}
 	
 	public List<Conteudo> getProvasConteudo() {
-		if(provaSelecionada != null)
-			return provaService.pesquisarProvasConteudos(provaSelecionada);
-		else{
-			try{
-			return provaService.pesquisarProvasConteudos(null);
-			}
-			catch (Exception e){
-				return null;
-			}
-		}
+		return contService.getConteudos();
 	}
 	
 	
 	public List<Disciplina> getProvasDisciplina() {
-		if(provaSelecionada != null)
-			return provaService.pesquisarProvasDisciplina(provaSelecionada);
-		else{
-			try{
-			return provaService.pesquisarProvasDisciplina(null);
-			}
-			catch (Exception e){
-				return null;
-			}
-		}
+		return discService.getDisciplinas();
 	}
 
 }

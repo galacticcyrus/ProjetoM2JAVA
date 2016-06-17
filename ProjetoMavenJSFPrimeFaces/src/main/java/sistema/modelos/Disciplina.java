@@ -15,14 +15,20 @@ import javax.persistence.OneToMany;
 @Entity
 public class Disciplina implements Serializable{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int id;
 	
 	String professor;
 	String nome; 
-	@OneToMany
+	@OneToMany(mappedBy="disciplina")
 	List<Conteudo> conteudos;
+	
 	@OneToMany
 	List<Prova> provas;
 	

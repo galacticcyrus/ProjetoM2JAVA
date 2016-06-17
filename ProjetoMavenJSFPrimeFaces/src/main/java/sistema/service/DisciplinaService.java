@@ -1,5 +1,6 @@
 package sistema.service;
 
+import java.io.Serializable;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -14,7 +15,11 @@ import sistema.modelos.Conteudo;
 import sistema.modelos.Prova;
 
 
-public class DisciplinaService{
+public class DisciplinaService implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private DisciplinaDAO disciplinaDAO = new DisciplinaDAO();
 
 	public Disciplina salvar(Disciplina disciplina) {

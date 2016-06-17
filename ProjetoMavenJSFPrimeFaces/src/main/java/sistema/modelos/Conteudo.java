@@ -16,10 +16,16 @@ import sistema.modelos.Prova;
 @Entity
 public class Conteudo implements Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -6493480562655431382L;
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int id;
+	
 	private String nome;
+	
 	public String getNome() {
 		return nome;
 	}
@@ -30,6 +36,7 @@ public class Conteudo implements Serializable{
 
 	@OneToMany
 	List<Questao> questoes;
+	
 	@ManyToOne
 	private Disciplina disciplina;
 

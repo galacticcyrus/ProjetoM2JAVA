@@ -6,6 +6,7 @@ import sistema.dao.ConteudoDAO;
 import sistema.dao.DisciplinaDAO;
 import sistema.modelos.Conteudo;
 import sistema.modelos.Disciplina;
+import sistema.modelos.Produto;
 
 public class ConteudoService {
 	ConteudoDAO conteudoDAO = new ConteudoDAO();
@@ -17,6 +18,7 @@ public class ConteudoService {
 			return conteudo;
 		
 		}
+		
 	
 		public List <Conteudo> getConteudos()
 		{
@@ -42,15 +44,17 @@ public class ConteudoService {
 		
 		public List<Disciplina> pesquisarDisciplinaConteudo(Conteudo conteudo) {
 
-			DisciplinaDAO dDAO = new DisciplinaDAO();
+			/*DisciplinaDAO dDAO = new DisciplinaDAO();
 			List<Disciplina> disciplinas = null;
 			if(conteudo!=null){
 			conteudo = conteudoDAO.getById(Conteudo.class, conteudo.getId());
 			disciplinas.add(conteudo.getDisciplina());
 			}
-			else{
-				disciplinas = dDAO.getAll(Disciplina.class);
-			}
+			else{*/
+			DisciplinaDAO dDAO = new DisciplinaDAO();
+			List<Disciplina> disciplinas = null;
+			disciplinas = dDAO.getAll(Disciplina.class);
+			//}
 			return disciplinas;
 		}
 }

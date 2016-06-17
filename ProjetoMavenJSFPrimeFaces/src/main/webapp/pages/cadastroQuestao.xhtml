@@ -81,8 +81,12 @@
 						<p:outputLabel value="#{aux.conteudo}" />
 					</f:facet>
 					<f:facet name="input">
-						<p:inputText id="questaoConteudo" value="#{aux.conteudo}"
-							style="width:100%" />
+						<p:selectOneMenu value="#{aux.conteudo}"
+							converter="converterDisciplina" style="width:100%">
+							<f:selectItem itemValue="" itemLabel="#{msg['pages.cadastroQuestao.disciplina.msg']}" />
+							<f:selectItems value="#{conteudoManagedBean.conteudos}"
+								var="aux" itemValue="#{aux}" itemLabel="#{aux.nome}" />
+						</p:selectOneMenu>
 					</f:facet>
 				</p:cellEditor>
 	  </p:column>

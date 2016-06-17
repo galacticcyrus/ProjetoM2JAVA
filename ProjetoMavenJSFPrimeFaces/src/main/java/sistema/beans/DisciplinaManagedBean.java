@@ -13,11 +13,14 @@ import javax.faces.model.DataModel;
 
 import org.primefaces.event.RowEditEvent;
 import org.primefaces.event.SelectEvent;
+
 import sistema.beans.datamodel.DisciplinaDataModel;
 import sistema.modelos.Disciplina;
 import sistema.modelos.Prova;
 import sistema.modelos.Conteudo;
+import sistema.service.ConteudoService;
 import sistema.service.DisciplinaService;
+import sistema.service.ProvaService;
 
 @ManagedBean(name = "disciplinaManagedBean")
 @ViewScoped
@@ -33,6 +36,8 @@ public class DisciplinaManagedBean implements Serializable{
 	private List<Disciplina> disciplinas;
 	private List<Prova> provas;
 	private List<Conteudo> conteudos;
+	private ConteudoService contService = new ConteudoService();
+	private ProvaService provaServices = new ProvaService();
 	
 	
 	public List<Prova> getProvas() {
@@ -103,30 +108,11 @@ public class DisciplinaManagedBean implements Serializable{
 	}
 
 	public List<Prova> getProvasDisciplina() {
-		if (disciplinaSelecionada != null) {
-			return servico.pesquisarProvasDisciplina(disciplinaSelecionada);
-		} else{
-			try{
-				return servico.pesquisarProvasDisciplina(null);
-			}
-			catch(Exception e){
-				return null;
-			}
-		}
-
+		return provaServices.getProvas();
 	}
 	
 	public List<Conteudo> getConteudosDisciplina() {
-		if(disciplinaSelecionada != null)
-			return servico.pesquisarConteudosDisciplina(disciplina);
-		else{
-			try{
-			return servico.pesquisarConteudosDisciplina(null);
-			}
-			catch (Exception e){
-				return null;
-			}
-		}
+		return contService.getConteudos();
 	}
 
 
