@@ -22,7 +22,7 @@ public class Disciplina implements Serializable{
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	private int id;
+	private long id;
 	
 	String professor;
 	String nome; 
@@ -56,10 +56,10 @@ public class Disciplina implements Serializable{
 	public void setProvas(List<Prova> provas) {
 		this.provas = provas;
 	}
-	public int getid() {
+	public long getid() {
 		return id;
 	}
-	public void setid(int id) {
+	public void setid(long id) {
 		this.id = id;
 	}
 	
@@ -110,7 +110,7 @@ public class Disciplina implements Serializable{
 	//*********************************************
 
 	public void addConteudo(Conteudo c){
-		c.setId(conteudos.size()); //o id começa do zero
+		//c.setId(conteudos.size()+1);
 		conteudos.add(c);
 	}
 
@@ -123,5 +123,33 @@ public class Disciplina implements Serializable{
 		this.provas.add(prova);
 		
 	}
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + (int) (id ^ (id >>> 32));
+		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
+		return result;
+	}
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Disciplina other = (Disciplina) obj;
+		if (id != other.id)
+			return false;
+		if (nome == null) {
+			if (other.nome != null)
+				return false;
+		} else if (!nome.equals(other.nome))
+			return false;
+		return true;
+	}
+	
+	
 	
 }

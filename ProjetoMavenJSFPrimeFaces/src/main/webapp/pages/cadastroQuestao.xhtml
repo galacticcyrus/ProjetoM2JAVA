@@ -36,7 +36,9 @@
       <p:outputLabel value="#{msg['pages.cadastroQuestao.tipoPergunta']}" />
       <p:inputText value="#{questaoManagedBean.questao.tipoPergunta}"/>
       <p:outputLabel value="#{msg['pages.cadastroQuestao.img']}" />
-      <p:inputText value="#{questaoManagedBean.questao.img}"/>  
+      <p:inputText value="#{questaoManagedBean.questao.enunimg}"/>  
+      <p:outputLabel value="#{msg['pages.cadastroQuestao.resolimg']}" />
+      <p:inputText value="#{questaoManagedBean.questao.resolimg}"/>  
 	  </p:panelGrid>
 	  <p:commandButton value="#{msg['pages.comuns.form.btnSalvar']}" 
 	                 action="#{questaoManagedBean.salvar}"
@@ -81,12 +83,8 @@
 						<p:outputLabel value="#{aux.conteudo}" />
 					</f:facet>
 					<f:facet name="input">
-						<p:selectOneMenu value="#{aux.conteudo}"
-							converter="converterDisciplina" style="width:100%">
-							<f:selectItem itemValue="" itemLabel="#{msg['pages.cadastroQuestao.disciplina.msg']}" />
-							<f:selectItems value="#{conteudoManagedBean.conteudos}"
-								var="aux" itemValue="#{aux}" itemLabel="#{aux.nome}" />
-						</p:selectOneMenu>
+				<p:inputText id="questaoConteudo" value="#{aux.conteudo}"
+							style="width:100%" />
 					</f:facet>
 				</p:cellEditor>
 	  </p:column>

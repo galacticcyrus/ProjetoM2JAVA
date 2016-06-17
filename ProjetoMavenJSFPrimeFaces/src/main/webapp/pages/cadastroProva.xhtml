@@ -27,11 +27,11 @@
 					itemValue="#{aux}" itemLabel="#{aux.nome}" />
 	  </p:selectOneMenu>
 	  <p:outputLabel value="#{msg['pages.cadastroProva.conteudo.msg']}"/>
-	  <p:selectOneMenu value="#{provaManagedBean.conteudos}" converter="converterConteudo">
+	  <p:selectManyMenu value="#{provaManagedBean.conteudos}" converter="converterConteudo">
 				<f:selectItem itemValue="" itemLabel="#{msg['pages.cadastroProva.conteudo.msg']}" />
 				<f:selectItems value="#{provaManagedBean.provasConteudo}" var="aux"
 					itemValue="#{aux}" itemLabel="#{aux.nome}" />
-	  </p:selectOneMenu>
+	  </p:selectManyMenu>
       <p:outputLabel value="#{msg['pages.cadastroProva.Faculdade']}" />
       <p:inputText value="#{provaManagedBean.prova.faculdade}"/>
       <p:outputLabel value="#{msg['pages.cadastroProva.dificuldade']}" />

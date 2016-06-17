@@ -26,12 +26,25 @@ public class Questao implements Serializable{
 	@ManyToMany
 	List<Prova> provas;
 	String img;
-	String enunciado;
-	String resolucao;
+	String enunciado, enunimg;
+	String resolucao, resolimg;
 	String tipoPergunta;
 	@ManyToOne
 	Conteudo conteudo;
 	
+	
+	public String getEnunimg() {
+		return enunimg;
+	}
+	public void setEnunimg(String enunimg) {
+		this.enunimg = enunimg;
+	}
+	public String getResolimg() {
+		return resolimg;
+	}
+	public void setResolimg(String resolimg) {
+		this.resolimg = resolimg;
+	}
 	public void criaResolucao(String img){
 		if(img.isEmpty()){
 			
@@ -96,9 +109,37 @@ public class Questao implements Serializable{
 	public void setConteudo(Conteudo conteudo) {
 		this.conteudo = conteudo;
 	}
-	public void addProva(Prova p) {
-		// TODO Auto-generated method stub
-		this.provas.add(p);
+	
+	public void addProva(Prova prova){
+		this.provas.add(prova);
 	}
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((enunciado == null) ? 0 : enunciado.hashCode());
+		result = prime * result + id;
+		return result;
+	}
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Questao other = (Questao) obj;
+		if (enunciado == null) {
+			if (other.enunciado != null)
+				return false;
+		} else if (!enunciado.equals(other.enunciado))
+			return false;
+		if (id != other.id)
+			return false;
+		return true;
+	}
+	
+	
 
 }

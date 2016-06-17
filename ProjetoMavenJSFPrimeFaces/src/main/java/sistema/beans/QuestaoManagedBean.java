@@ -50,6 +50,10 @@ public class QuestaoManagedBean {
 	public Conteudo getConteudo() {
 		return conteudo;
 	}
+	
+	public void setConteudo(Conteudo conteudo){
+		this.conteudo = conteudo;
+	}
 
 	/*public void remove(Disciplina conteudo) {
 		prodService.remover(conteudo);

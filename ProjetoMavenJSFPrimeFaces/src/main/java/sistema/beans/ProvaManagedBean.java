@@ -35,6 +35,7 @@ public class ProvaManagedBean {
 	public void salvar() {
 		disciplina.addProva(prova);
 		prova.setDisciplina(disciplina);
+		prova.setConteudos(conteudos);
 
 		prova = provaService.salvar(prova);
 
@@ -46,12 +47,18 @@ public class ProvaManagedBean {
 
 	}
 
+	public void setDisciplina(Disciplina disciplina){
+		this.disciplina=disciplina;
+	}
 
 	public Disciplina getDisciplina() {
 		return disciplina;
 	}
 	public List<Conteudo> getConteudos(){
 		return conteudos;
+	}
+	public void setConteudo(List<Conteudo> conteudos){
+		this.conteudos = conteudos;
 	}
 	/*public void remove(Disciplina conteudo) {
 		prodService.remover(conteudo);
