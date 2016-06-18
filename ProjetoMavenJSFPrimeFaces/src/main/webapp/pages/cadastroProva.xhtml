@@ -79,7 +79,7 @@
     
     			<p:cellEditor>
 					<f:facet name="output">
-						<p:outputLabel value="#{aux.falcudade}" />
+						<p:outputLabel value="#{aux.faculdade}" />
 					</f:facet>
 					<f:facet name="input">
 						<p:inputText id="provaFacul" value="#{aux.faculdade}"
@@ -88,14 +88,14 @@
 				</p:cellEditor>
 	  </p:column>
 	  
-	 <p:column headerText="#{msg['pages.cadastroProva.Turma']}" filterBy="#{aux.Turma}">
+	 <p:column headerText="#{msg['pages.cadastroProva.Turma']}" filterBy="#{aux.turma}">
     
     			<p:cellEditor>
 					<f:facet name="output">
-						<p:outputLabel value="#{aux.Turma}" />
+						<p:outputLabel value="#{aux.turma}" />
 					</f:facet>
 					<f:facet name="input">
-						<p:inputText id="provaTurma" value="#{aux.Turma}"
+						<p:inputText id="provaTurma" value="#{aux.turma}"
 							style="width:100%" />
 					</f:facet>
 				</p:cellEditor>
@@ -131,19 +131,16 @@
 				</p:cellEditor>
       </p:column>
       
-      <p:column headerText="#{msg['pages.cadastroProva.conteudo']}" filterBy="#{aux.conteudo}">
+      <p:column headerText="#{msg['pages.cadastroProva.conteudos']}" filterBy="#{aux.conteudos}">
     
     			<p:cellEditor>
 					<f:facet name="output">
-						<p:outputLabel value="#{aux.conteudo}" />
+						<p:outputLabel value="#{aux.conteudos}" />
 					</f:facet>
 					<f:facet name="input">
-						<p:selectOneMenu value="#{aux.conteudo}"
-							converter="converterConteudo" style="width:100%">
-							<f:selectItem itemValue="" itemLabel="#{msg['pages.cadastroConteudo.disciplina.msg']}" />
-							<f:selectItems value="#{provaManagedBean.conteudos}"
-								var="aux" itemValue="#{aux}" itemLabel="#{aux.nome}" />
-						</p:selectOneMenu>
+
+						<p:inputText id="provaConteudo" value="#{aux.conteudos}"
+							style="width:100%" />
 					</f:facet>
 				</p:cellEditor>
 	  </p:column>

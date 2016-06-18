@@ -57,7 +57,7 @@ public class ProvaManagedBean {
 	public List<Conteudo> getConteudos(){
 		return conteudos;
 	}
-	public void setConteudo(List<Conteudo> conteudos){
+	public void setConteudos(List<Conteudo> conteudos){
 		this.conteudos = conteudos;
 	}
 	/*public void remove(Disciplina conteudo) {

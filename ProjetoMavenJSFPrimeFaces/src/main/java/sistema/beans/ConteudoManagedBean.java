@@ -1,5 +1,6 @@
 package sistema.beans;
 
+import java.io.Serializable;
 import java.util.List;
 
 import javax.faces.application.FacesMessage;
@@ -22,7 +23,7 @@ import sistema.dao.ConteudoDAO;
 
 @ManagedBean(name = "conteudoManagedBean")
 @ViewScoped
-public class ConteudoManagedBean {
+public class ConteudoManagedBean implements Serializable{
 	private Conteudo conteudo = new Conteudo();
 	private Disciplina disciplina;
 	private ConteudoDAO contDAO = new ConteudoDAO();
