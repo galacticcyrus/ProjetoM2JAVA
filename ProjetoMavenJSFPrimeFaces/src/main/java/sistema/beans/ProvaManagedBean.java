@@ -1,5 +1,12 @@
 package sistema.beans;
 
+import java.io.IOException;
+import java.io.Serializable;
+import java.sql.Date;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import javax.faces.bean.ManagedBean;
@@ -7,9 +14,12 @@ import javax.faces.bean.ViewScoped;
 
 import org.primefaces.event.RowEditEvent;
 
+import com.itextpdf.text.DocumentException;
+
 import sistema.dao.ProvaDAO;
 import sistema.modelos.Conteudo;
 import sistema.modelos.Disciplina;
+import sistema.modelos.Produto;
 import sistema.modelos.Prova;
 import sistema.modelos.Questao;
 import sistema.service.DisciplinaService;
@@ -20,7 +30,7 @@ import sistema.service.ProvaService;
 
 @ManagedBean(name = "provaManagedBean")
 @ViewScoped
-public class ProvaManagedBean {
+public class ProvaManagedBean implements Serializable{
 	private Prova prova = new Prova();
 	private ProvaDAO provaDAO = new ProvaDAO();
 	private ProvaService provaService = new ProvaService();
@@ -93,6 +103,41 @@ public class ProvaManagedBean {
 	
 	public List<Disciplina> getProvasDisciplina() {
 		return discService.getDisciplinas();
+	}
+	
+	public void Imprimir(int aux) throws DocumentException, IOException
+	{
+		for(int i = 0; i<provas.size(); i++)
+		{
+			if(provas.get(i).getId() == aux)
+				provas.get(i).imprimir();
+		}		
+	}
+	
+	public void remove() throws DocumentException, IOException{
+		
+		
+		//provaService.remover(prova);
+		//provas.remove(prova);
+	}
+	public void geraProva(int aux) throws DocumentException, IOException{
+		//DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+		Calendar cal = Calendar.getInstance();
+		 //(dateFormat.format(cal.getTime())) para pegar o tempo atual
+		for(int i = 0; i<provas.size(); i++)
+		{
+			if(provas.get(i).getId() == aux){
+				String s = new String();
+				s = provas.get(i).getTiposQuestoes();
+				String sx[] = s.split(",");
+				List<String> tipos = new ArrayList<String>();
+				for(int j = 0;j< sx.length; j++){
+					tipos.add(sx[j]);
+				}
+				System.out.println(sx);
+				provas.get(i).getDisciplina().geraProva(provas.get(i).getTempo(), provas.get(i).getQtdQuestoes(), provas.get(i).getDificuldade(), provas.get(i).getConteudos(), tipos, provas.get(i).getCurso(), provas.get(i).getFaculdade(), provas.get(i).getTurma(),cal.getTime());
+			}
+			}	
 	}
 
 }

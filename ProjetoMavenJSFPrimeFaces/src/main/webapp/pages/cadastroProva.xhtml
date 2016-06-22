@@ -38,6 +38,10 @@
       <p:inputText value="#{provaManagedBean.prova.dificuldade}"/>
       <p:outputLabel value="#{msg['pages.cadastroProva.Turma']}" />
       <p:inputText value="#{provaManagedBean.prova.turma}"/>
+      <p:outputLabel value="#{msg['pages.cadastroProva.qtdQuestoes']}" />
+      <p:inputText value="#{provaManagedBean.prova.qtdQuestoes}"/>
+      <p:outputLabel value="#{msg['pages.cadastroProva.tiposQuestoes']}" />
+      <p:inputText value="#{provaManagedBean.prova.tiposQuestoes}"/>
 	  </p:panelGrid>
 	  <p:commandButton value="#{msg['pages.comuns.form.btnSalvar']}" 
 	                 action="#{provaManagedBean.salvar}"
@@ -101,6 +105,32 @@
 				</p:cellEditor>
 	  </p:column>
 	  
+	  <p:column headerText="#{msg['pages.cadastroProva.tiposQuestoes']}" filterBy="#{aux.tiposQuestoes}">
+    
+    			<p:cellEditor>
+					<f:facet name="output">
+						<p:outputLabel value="#{aux.tiposQuestoes}" />
+					</f:facet>
+					<f:facet name="input">
+						<p:inputText id="provaTipos" value="#{aux.tiposQuestoes}"
+							style="width:100%" />
+					</f:facet>
+				</p:cellEditor>
+	  </p:column>
+	  
+	  <p:column headerText="#{msg['pages.cadastroProva.qtdQuestoes']}" filterBy="#{aux.qtdQuestoes}">
+    
+    			<p:cellEditor>
+					<f:facet name="output">
+						<p:outputLabel value="#{aux.qtdQuestoes}" />
+					</f:facet>
+					<f:facet name="input">
+						<p:inputText id="provaQTD" value="#{aux.qtdQuestoes}"
+							style="width:100%" />
+					</f:facet>
+				</p:cellEditor>
+	  </p:column>
+	  
 	  <p:column headerText="#{msg['pages.cadastroProva.dificuldade']}" filterBy="#{aux.dificuldade}">
     
     			<p:cellEditor>
@@ -118,7 +148,7 @@
      
      			<p:cellEditor>
 					<f:facet name="output">
-						<p:outputLabel value="#{aux.disciplina}" />
+						<p:outputLabel value="#{aux.disciplina.nome}" />
 					</f:facet>
 					<f:facet name="input">
 						<p:selectOneMenu value="#{aux.disciplina}"
@@ -151,7 +181,19 @@
 					
 					<p:commandLink id="remover" styleClass="ui-icon ui-icon-trash"
 						style="text-align:center"
+						actionListener="#{provaManagedBean.remove}"
 						update="tabelaProva" />
+						
+					<p:commandLink id="imprimir" styleClass="ui-icon ui-icon-calculator"
+						style="text-align:center"
+						actionListener="#{provaManagedBean.Imprimir(aux.id)}"
+						update="tabelaProva" />
+						
+					<p:commandLink id="geraProva" styleClass="ui-icon ui-icon-disk"
+						style="text-align:center"
+						actionListener="#{provaManagedBean.geraProva(aux.id)}"
+						update="tabelaProva" />	
+						
 	  </p:column>
 
       

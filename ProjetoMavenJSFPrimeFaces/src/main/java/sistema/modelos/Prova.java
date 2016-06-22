@@ -43,13 +43,25 @@ public class Prova implements Serializable{
 	Disciplina disciplina;
 	String Faculdade;
 	String Turma;
+	int qtdQuestoes;
+	String tiposQuestoes;
 	List<Conteudo> conteudos;
+	String Curso;
 	public List<Questao> getQuestoes() {
 		return questoes;
 	}
 
 	public void setQuestoes(List<Questao> questoes) {
 		this.questoes = questoes;
+	}
+	
+
+	public String getTiposQuestoes() {
+		return tiposQuestoes;
+	}
+
+	public void setTiposQuestoes(String tiposQuestoes) {
+		this.tiposQuestoes = tiposQuestoes;
 	}
 
 	public int getDificuldade() {
@@ -100,15 +112,6 @@ public class Prova implements Serializable{
 		this.conteudos = conteudos;
 	}
 
-	public List<String> getTipos() {
-		return tipos;
-	}
-
-	public void setTipos(List<String> tipos) {
-		this.tipos = tipos;
-	}
-
-	List<String> tipos;
 	
 
 	
@@ -151,20 +154,24 @@ public class Prova implements Serializable{
 		this.disciplina = disciplina2;
 	}
 	
-	public void imprimirProva()throws DocumentException, IOException 
+	public void imprimir()throws DocumentException, IOException 
 	{
 	 
-		createPdf(disciplina.getNome() + " " + Turma + ".pdf", false);	    
+		createPdf(disciplina.getNome() + " " + Turma + ".pdf", false);	
+		createPdf(disciplina.getNome() + " " + Turma + " Gabarito.pdf", true);
 		
 	}
 	
-	public void imprimirGabarito()throws DocumentException, IOException 
-	{
-	 
-		createPdf(disciplina.getNome() + " " + Turma + " Gabarito.pdf", true);	    
-		
-	}
 	
+		
+	public int getQtdQuestoes() {
+		return qtdQuestoes;
+	}
+
+	public void setQtdQuestoes(int qtdQuestoes) {
+		this.qtdQuestoes = qtdQuestoes;
+	}
+
 	public void createPdf(String filename, boolean gabarito) throws DocumentException, IOException {
 		        // step 1
 		        Document document = new Document();
@@ -193,6 +200,16 @@ public class Prova implements Serializable{
 		        // step 5
 		        document.close();
 		   }
+
+	
+	
+	public String getCurso() {
+		return Curso;
+	}
+
+	public void setCurso(String curso) {
+		Curso = curso;
+	}
 
 	@Override
 	public int hashCode() {
