@@ -46,13 +46,7 @@ public class Conteudo implements Serializable{
 		if(p.getQuestoes() == null)
 			p.setQuestoes(new ArrayList<Questao>());
 		
-		for(Questao q: questoes){
-			System.out.println(tipo);
-			System.out.println(q.tipoPergunta);
-			System.out.println(dificuldade);
-			System.out.println(q.dificuldade);
-			
-			
+		for(Questao q: questoes){		
 			
 			if(q.tipoPergunta.equals(tipo) && q.dificuldade==dificuldade){
 				if(p.questoes!= null){

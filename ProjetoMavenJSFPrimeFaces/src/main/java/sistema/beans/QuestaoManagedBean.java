@@ -30,14 +30,14 @@ public class QuestaoManagedBean {
 	private QuestaoService questaoService = new QuestaoService();
 	private ConteudoService conteudoService = new ConteudoService();
 	private List<Questao> questoes;
-	private List<Conteudo> conteudos;
+	//private List<Conteudo> conteudos;
 	private List<Prova> provas;
 	private Conteudo conteudo = new Conteudo();
 	
 	public void salvar() {
-		conteudo.addQuestao(questao);
 		questao.setConteudo(conteudo);
 		questao = questaoService.salvar(questao);
+		conteudo.addQuestao(questao);
 		conteudo = conteudoService.salvar(conteudo);
 
 		if (questoes != null)

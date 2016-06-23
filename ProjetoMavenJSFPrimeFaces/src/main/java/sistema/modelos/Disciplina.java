@@ -65,10 +65,9 @@ public class Disciplina implements Serializable{
 	
 	//*********************************************
 	
-	public Prova geraProva(int tempo, int qtd, int dificuldade, List<Conteudo> cons, List<String> tipos, String curso, String faculdade, String turma, Date data, int id){
+	public Prova geraProva(int tempo, int qtd, int dificuldade, List<Conteudo> cons, List<String> tipos, String curso, String faculdade, String turma, Date data, Prova p){
 
-		Prova ret = new Prova();
-		ret.setId(id);
+		Prova ret = p;
 		int c = 0, t = 0;
 		
 		for(int i = 0; i < qtd; i++)
@@ -102,13 +101,15 @@ public class Disciplina implements Serializable{
 				break; //não achou outra pra substituir, deixa assim mesmo
 
 		}
+		System.out.println(ret.getCurso() + ", " + ret.getDificuldade() + ", " + ret.getFaculdade() + ", " + ret.getQtdQuestoes() + ", " + ret.getTempo() + ", " + ret.getTurma() + ", " + ret.getId());
 		return ret;
 	}
 
 	//*********************************************
 
 	public void addConteudo(Conteudo c){
-		//c.setId(conteudos.size()+1);
+		System.out.println(c.getId());
+		c.setId(c.getId());
 		conteudos.add(c);
 	}
 

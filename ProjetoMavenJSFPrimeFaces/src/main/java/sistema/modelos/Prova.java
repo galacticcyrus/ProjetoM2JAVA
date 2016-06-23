@@ -186,24 +186,25 @@ public class Prova implements Serializable{
 		        System.out.println(questoes.size());
 		        for(int i = 0; i < questoes.size(); i++)
 		        {
-		        	System.out.println(i);
 		        	if(gabarito)
 		        	{
-		        		if(questoes.get(i).resolimg != null)
+		        		if(!questoes.get(i).resolimg.equals(""))
 		        			document.add(Image.getInstance(questoes.get(i).resolimg));
 		        		document.add(new Paragraph(""+(i+1)+" "+questoes.get(i).getResolucao()));
 		        	}
 		        	else
 		        	{
-		        		if(questoes.get(i).enunimg != null)
+		        		if(!questoes.get(i).enunimg.equals(""))
+		        		{
+			        		System.out.println(questoes.get(i).enunimg);
 		        			document.add(Image.getInstance(questoes.get(i).enunimg));
+		        		}
 		        		document.add(new Paragraph(""+(i+1)+" "+questoes.get(i).getResolucao()));
 		        	}
 		        }
 		        document.add(new Paragraph("Boa prova!"));
 		        // step 5
-
-		        System.out.println("criou pdf");
+		        System.out.println(filename);
 		        document.close();
 		   }
 
