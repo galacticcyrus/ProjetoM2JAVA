@@ -57,6 +57,7 @@
    <h3><p:outputLabel value="#{msg['pages.cadastroProva.tableTitle']}" /> </h3>
    <h:form id="formTableProva">
    
+   
     <p:dataTable
                 value="#{provaManagedBean.provas}"
                 var="aux"
@@ -70,10 +71,15 @@
                 rowsPerPageTemplate="5,10,15"
                 
                 emptyMessage="#{msg['pages.cadastroProva.filterMSG']}"
-                
+              	selectionMode="single" selection="#{provaManagedBean.provaSelecionada}"  rowKey="#{aux.id}"
+              	  
    >
+   
       
-      <p:ajax event="rowEdit" listener="#{provaManagedBean.onRowEdit}" update="tabelaProva" />
+      <p:ajax event="rowEdit" listener="#{provaManagedBean.onRowEdit}" update="formTableProva" />
+      <p:ajax event="rowSelect"   update=":formTableProva" />
+      <p:ajax event="rowUnselect" update=":formTableProva" />
+      
       
       <p:column headerText="#{msg['pages.cadastroProva.id']}" filterBy="#{aux.id}">
         <p:outputLabel value="#{aux.id}" />
@@ -176,6 +182,7 @@
 				</p:cellEditor>
       </p:column>
       
+      
       <p:column style="width:70px" headerText="#{msg['pages.cadastroProva.optionTable']}">
 					
 					<p:rowEditor />
@@ -195,6 +202,14 @@
 						actionListener="#{provaManagedBean.geraProva(aux.id)}"
 						update="tabelaProva" />	
 						
+
+					<p:commandLink id="provaQuestoes" styleClass="ui-icon ui-icon-arrow"
+						style="text-align:center"
+						actionListener="#{provaManagedBean.getProvaQuestoes()}"
+						update="formTableQuestao" />	
+
+					
+						
 	  </p:column>
 
       
@@ -203,6 +218,24 @@
 
 	</h:form>
 
+	<h:form id="formTableQuestao">
+		<h3><p:outputLabel value="Questions"/></h3>
+	    <p:outputLabel value="#{msg['pages.cadastroProva.disciplina']}: #{provaManagedBean.provaSelecionada.disciplina}" />
+	    <p:outputLabel value="#{msg['pages.cadastroProva.turma']}: #{provaManagedBean.provaSelecionada.turma}" />
+		<p:dataTable value="#{provaManagedBean.provaQuestoes}" var="auxq"	id="tabelaQuestao">
+
+			
+			<p:column headerText="#{msg['pages.cadastroProva.Questoes.enunciado']}">
+				<h:outputText value="#{aux.enunciado}" />
+			</p:column>
+
+			<p:column headerText="#{msg['pages.cadastroProva.Questoes.resolucao']}">
+						<p:outputLabel value="#{aux.resolucao}" />
+			</p:column>
+
+
+		</p:dataTable>
+	</h:form>
 	
    	   
 	</ui:define>

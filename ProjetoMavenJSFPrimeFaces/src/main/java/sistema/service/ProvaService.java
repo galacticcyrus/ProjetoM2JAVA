@@ -7,7 +7,10 @@ import sistema.dao.ProvaDAO;
 import sistema.dao.DisciplinaDAO;
 import sistema.modelos.Conteudo;
 import sistema.modelos.Disciplina;
+import sistema.modelos.Fornecedor;
+import sistema.modelos.Produto;
 import sistema.modelos.Prova;
+import sistema.modelos.Questao;
 
 public class ProvaService {
 	ProvaDAO provaDAO = new ProvaDAO();
@@ -56,6 +59,15 @@ public class ProvaService {
 		return conteudos;
 	}
 
+	public List<Questao> pesquisaProvaQuestao(Prova prova){
+		List<Questao> questoes;
+
+		prova = provaDAO.getById(Prova.class, prova.getId());
+		questoes = prova.getQuestoes();
+
+		return questoes;
+	}
+	
 	@SuppressWarnings("null")
 	public List<Disciplina> pesquisarProvasDisciplina(Prova prova) {
 		DisciplinaDAO disciplinaDAO = new DisciplinaDAO();

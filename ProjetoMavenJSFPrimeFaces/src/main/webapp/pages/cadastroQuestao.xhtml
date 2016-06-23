@@ -22,8 +22,8 @@
 	  <p:outputLabel value="#{msg['pages.cadastroQuestao.conteudo']}" />
       <p:selectOneMenu value="#{questaoManagedBean.conteudo}" converter="converterConteudo">
 				<f:selectItem itemValue="" itemLabel="#{msg['pages.cadastroQuestao.conteudo.msg']}" />
-				<f:selectItems value="#{questaoManagedBean.questoesConteudo}" var="aux"
-					itemValue="#{aux}" itemLabel="#{aux.nome}" />
+				<f:selectItems value="#{questaoManagedBean.questoesConteudo}" var="auxq"
+					itemValue="#{auxq}" itemLabel="#{auxq.nome}" />
 			</p:selectOneMenu>
       <p:outputLabel value="#{msg['pages.cadastroQuestao.dificuldade']}" />
       <p:inputText value="#{questaoManagedBean.questao.dificuldade}"/>
@@ -54,7 +54,7 @@
    
     <p:dataTable
                 value="#{questaoManagedBean.questoes}"
-                var="aux"
+                var="auxq"
                 id="tabelaQuestao"
             
                 editable="true"
@@ -70,20 +70,20 @@
       
       <p:ajax event="rowEdit" listener="#{questaoManagedBean.onRowEdit}" update="tabelaQuestao" />
       
-      <p:column headerText="#{msg['pages.cadastroQuestao.id']}" filterBy="#{aux.id}">
-        <p:outputLabel value="#{aux.id}" />
+      <p:column headerText="#{msg['pages.cadastroQuestao.id']}" filterBy="#{auxq.id}">
+        <p:outputLabel value="#{auxq.id}" />
       </p:column>
       
       
       
-      <p:column headerText="#{msg['pages.cadastroQuestao.conteudo']}" filterBy="#{aux.conteudo}">
+      <p:column headerText="#{msg['pages.cadastroQuestao.conteudo']}" filterBy="#{auxq.conteudo}">
     
     			<p:cellEditor>
 					<f:facet name="output">
-						<p:outputLabel value="#{aux.conteudo.nome}" />
+						<p:outputLabel value="#{auxq.conteudo.nome}" />
 					</f:facet>
 					<f:facet name="input">
-				<p:inputText id="questaoConteudo" value="#{aux.conteudo}"
+				<p:inputText id="questaoConteudo" value="#{auxq.conteudo}"
 							style="width:100%" />
 					</f:facet>
 				</p:cellEditor>
@@ -102,79 +102,79 @@
 				</p:cellEditor>
 	  </p:column>
 	  
-	        <p:column headerText="#{msg['pages.cadastroQuestao.dificuldade']}" filterBy="#{aux.dificuldade}">
+	        <p:column headerText="#{msg['pages.cadastroQuestao.dificuldade']}" filterBy="#{auxq.dificuldade}">
     
     			<p:cellEditor>
 					<f:facet name="output">
-						<p:outputLabel value="#{aux.dificuldade}" />
+						<p:outputLabel value="#{auxq.dificuldade}" />
 					</f:facet>
 					<f:facet name="input">
-						<p:inputText id="questaoDificuldade" value="#{aux.dificuldade}"
+						<p:inputText id="questaoDificuldade" value="#{auxq.dificuldade}"
 							style="width:100%" />
 					</f:facet>
 				</p:cellEditor>
 	  </p:column>
     
-      <p:column headerText="#{msg['pages.cadastroQuestao.enunciado']}" filterBy="#{aux.enunciado}">
+      <p:column headerText="#{msg['pages.cadastroQuestao.enunciado']}" filterBy="#{auxq.enunciado}">
      
      			<p:cellEditor>
 					<f:facet name="output">
-						<p:outputLabel value="#{aux.enunciado}" />
+						<p:outputLabel value="#{auxq.enunciado}" />
 					</f:facet>
 					<f:facet name="input">
-						<p:inputText id="questaoEnunciado" value="#{aux.enunciado}"
+						<p:inputText id="questaoEnunciado" value="#{auxq.enunciado}"
 							style="width:100%" />
 					</f:facet>
 				</p:cellEditor>
       </p:column>
       
-            <p:column headerText="#{msg['pages.cadastroQuestao.resolucao']}" filterBy="#{aux.resolucao}">
+            <p:column headerText="#{msg['pages.cadastroQuestao.resolucao']}" filterBy="#{auxq.resolucao}">
     
     			<p:cellEditor>
 					<f:facet name="output">
-						<p:outputLabel value="#{aux.resolucao}" />
+						<p:outputLabel value="#{auxq.resolucao}" />
 					</f:facet>
 					<f:facet name="input">
-						<p:inputText id="questaoResolucao" value="#{aux.resolucao}"
+						<p:inputText id="questaoResolucao" value="#{auxq.resolucao}"
 							style="width:100%" />
 					</f:facet>
 				</p:cellEditor>
 	  </p:column>
 	  
-	        <p:column headerText="#{msg['pages.cadastroQuestao.tempoEstimado']}" filterBy="#{aux.tempoEstimado}">
+	        <p:column headerText="#{msg['pages.cadastroQuestao.tempoEstimado']}" filterBy="#{auxq.tempoEstimado}">
     
     			<p:cellEditor>
 					<f:facet name="output">
-						<p:outputLabel value="#{aux.tempoEstimado}" />
+						<p:outputLabel value="#{auxq.tempoEstimado}" />
 					</f:facet>
 					<f:facet name="input">
-						<p:inputText id="questaoTempo" value="#{aux.tempoEstimado}"
+						<p:inputText id="questaoTempo" value="#{auxq.tempoEstimado}"
 							style="width:100%" />
 					</f:facet>
 				</p:cellEditor>
 	  </p:column>
 	  
-	        <p:column headerText="#{msg['pages.cadastroQuestao.tipoPergunta']}" filterBy="#{aux.tipoPergunta}">
+	        <p:column headerText="#{msg['pages.cadastroQuestao.tipoPergunta']}" filterBy="#{auxq.tipoPergunta}">
     
     			<p:cellEditor>
 					<f:facet name="output">
-						<p:outputLabel value="#{aux.tipoPergunta}" />
+						<p:outputLabel value="#{auxq.tipoPergunta}" />
 					</f:facet>
 					<f:facet name="input">
-						<p:inputText id="questaoTipo" value="#{aux.tipoPergunta}"
+						<p:inputText id="questaoTipo" value="#{auxq.tipoPergunta}"
 							style="width:100%" />
 					</f:facet>
 				</p:cellEditor>
 	  </p:column>
 	  
-	        <p:column headerText="#{msg['pages.cadastroQuestao.img']}" filterBy="#{aux.img}">
+	        <p:column headerText="#{msg['pages.cadastroQuestao.img']}" filterBy="#{auxq.img}">
     
     			<p:cellEditor>
 					<f:facet name="output">
-						<p:outputLabel value="#{aux.img}" />
+						<p:outputLabel value="#{auxq.img}" />
 					</f:facet>
 					<f:facet name="input">
-						<p:inputText id="questaoIMG" value="#{aux.img}"
+						<p:inputText id="questaoIMG" value="#{auxq.img}"
 							style="width:100%" />
 					</f:facet>
 				</p:cellEditor>

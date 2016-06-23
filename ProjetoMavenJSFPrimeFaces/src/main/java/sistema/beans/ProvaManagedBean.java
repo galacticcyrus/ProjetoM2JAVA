@@ -25,6 +25,7 @@ import sistema.modelos.Questao;
 import sistema.service.DisciplinaService;
 import sistema.service.ConteudoService;
 import sistema.service.ProvaService;
+import sistema.service.QuestaoService;
 
 
 
@@ -36,13 +37,14 @@ public class ProvaManagedBean implements Serializable{
 	private ProvaService provaService = new ProvaService();
 	private ConteudoService contService = new ConteudoService();
 	private DisciplinaService discService = new DisciplinaService();
+	private QuestaoService qService = new QuestaoService();
 	private List<Prova> provas;
 	//private List<Questao> questoes;
 	//private List<Disciplina> disciplinas;
 	private Questao questao = new Questao();
 	private List<Conteudo> conteudos;
 	private Disciplina disciplina = new Disciplina();
-	private Prova provaSelecionada = null;
+	private Prova provaSelecionada;
 	public void salvar() {
 		prova.setQuestoes(new ArrayList<Questao>());
 		prova.setDisciplina(disciplina);
@@ -58,6 +60,20 @@ public class ProvaManagedBean implements Serializable{
 		disciplina = null;
 
 	}
+
+	
+	
+	public Prova getProvaSelecionada() {
+		return provaSelecionada;
+	}
+
+
+
+	public void setProvaSelecionada(Prova provaSelecionada) {
+		this.provaSelecionada = provaSelecionada;
+	}
+
+
 
 	public void setDisciplina(Disciplina disciplina){
 		this.disciplina=disciplina;
@@ -77,6 +93,20 @@ public class ProvaManagedBean implements Serializable{
 		conteudos.remove(conteudo);
 	}*/
 
+	public List<Questao> getProvaQuestoes(){
+		if(provaSelecionada!= null){
+			List<Questao> q =
+			 provaService.pesquisaProvaQuestao(provaSelecionada);
+			for(int i =0;i<q.size();i++){
+				System.out.println(q.get(i).getEnunciado());
+				System.out.println(q.get(i).getResolucao());
+			}
+			return q;
+		}
+		else 
+			return null;
+	}
+	
 	public Prova getProva() {
 		return prova;
 	}
@@ -144,6 +174,7 @@ public class ProvaManagedBean implements Serializable{
 				System.out.println("foi");
 				System.out.println(p.getCurso() + ", " + p.getDificuldade() + ", " + p.getFaculdade() + ", " + p.getQtdQuestoes() + ", " + p.getTempo() + ", " + p.getTurma() + ", " + p.getId());
 				p = provaService.salvar(p);
+				
 			}
 			}	
 	}
