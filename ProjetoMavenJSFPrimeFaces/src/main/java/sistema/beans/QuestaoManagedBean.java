@@ -31,12 +31,14 @@ public class QuestaoManagedBean {
 	private ConteudoService conteudoService = new ConteudoService();
 	private List<Questao> questoes;
 	private List<Conteudo> conteudos;
+	private List<Prova> provas;
 	private Conteudo conteudo = new Conteudo();
 	
 	public void salvar() {
 		conteudo.addQuestao(questao);
 		questao.setConteudo(conteudo);
 		questao = questaoService.salvar(questao);
+		conteudo = conteudoService.salvar(conteudo);
 
 		if (questoes != null)
 			questoes.add(questao);
@@ -64,6 +66,13 @@ public class QuestaoManagedBean {
 		return questao;
 	}
 
+	public int getFrequenciaUso()
+	{
+		if(provas != null){
+		return provas.size();
+		}
+		return 0;
+	}
 	public void setQuestao(Questao questao) {
 		this.questao = questao;
 	}

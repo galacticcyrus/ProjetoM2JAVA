@@ -198,6 +198,8 @@ public class Prova implements Serializable{
 		        }
 		        document.add(new Paragraph("Boa prova!"));
 		        // step 5
+
+		        System.out.println("criou pdf");
 		        document.close();
 		   }
 

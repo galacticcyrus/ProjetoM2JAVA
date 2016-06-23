@@ -70,10 +70,9 @@ public class Disciplina implements Serializable{
 		Prova ret = new Prova();
 		int c = 0, t = 0;
 		
-
 		for(int i = 0; i < qtd; i++)
 		{
-
+			
 			if(c == cons.size())
 				c = 0;
 			if(t == tipos.size())
@@ -82,8 +81,8 @@ public class Disciplina implements Serializable{
 				i--; //ele não achou com esse conteudo e esse tipo, tenta de novo com outro c e outro t
 			c++; //passa por todos conteudos, em ordem (ex: cont 1, cont 2, cont 3, cont 1, cont 2, cont 3, cont 1,...)
 			t++; //passa por todos tipos, em ordem (ex: tipo 1, tipo 2, tipo 1, tipo 2, tipo 1, ...)
-
 		}
+		System.out.println("B");
 		while(ret.tempo > tempo)
 		{
 			int aux=-1, taux=0;
@@ -102,8 +101,6 @@ public class Disciplina implements Serializable{
 				break; //não achou outra pra substituir, deixa assim mesmo
 
 		}
-			
-
 		return ret;
 	}
 

@@ -42,9 +42,29 @@ public class Conteudo implements Serializable{
 
 	public boolean selecionaQuestao(int dificuldade, String tipo, Prova p, boolean jafoi){
 		List<Questao> ret = new ArrayList<Questao>();
+		
+		if(p.getQuestoes() == null)
+			p.setQuestoes(new ArrayList<Questao>());
+		
 		for(Questao q: questoes){
-			if(!p.questoes.contains(q) && q.tipoPergunta == tipo && q.dificuldade==dificuldade){
-					ret.add(q);    //adiciona todos os possiveis dentro dessas condicoes				
+			System.out.println(tipo);
+			System.out.println(q.tipoPergunta);
+			System.out.println(dificuldade);
+			System.out.println(q.dificuldade);
+			
+			
+			
+			if(q.tipoPergunta.equals(tipo) && q.dificuldade==dificuldade){
+				if(p.questoes!= null){
+					if(!p.questoes.contains(q)){
+					ret.add(q);    //adiciona todos os possiveis dentro dessas condicoes	
+						System.out.println("add uma questao no ret");
+					}
+					
+				}
+				else{
+					ret.add(q);
+				}
 			}
 		}
 		if(ret.size() != 0)
@@ -59,10 +79,12 @@ public class Conteudo implements Serializable{
 					id = i;
 				}
 			}
+
+			ret.get(id).addProva(p);
 			p.addQuestao(ret.get(id)); //adicionou o que foi menos utilizado e ainda esta dentro das condicoes
 			p.tempo += ret.get(id).tempoEstimado;
 			//disciplina.addProva(p)
-			ret.get(id).addProva(p);
+			System.out.println("true");
 			return true;
 
 		}
@@ -76,6 +98,7 @@ public class Conteudo implements Serializable{
 				else //caso o random d maior que 0.5 e dificuldade for 10
 					selecionaQuestao(dificuldade-1, tipo, p, true);
 		}
+		System.out.println("false");
 		return false;
 	}
 

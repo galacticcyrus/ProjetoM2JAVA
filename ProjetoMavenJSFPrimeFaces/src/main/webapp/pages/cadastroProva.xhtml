@@ -42,6 +42,8 @@
       <p:inputText value="#{provaManagedBean.prova.qtdQuestoes}"/>
       <p:outputLabel value="#{msg['pages.cadastroProva.tiposQuestoes']}" />
       <p:inputText value="#{provaManagedBean.prova.tiposQuestoes}"/>
+      <p:outputLabel value="#{msg['pages.cadastroProva.tempo']}" />
+      <p:inputText value="#{provaManagedBean.prova.tempo}"/>
 	  </p:panelGrid>
 	  <p:commandButton value="#{msg['pages.comuns.form.btnSalvar']}" 
 	                 action="#{provaManagedBean.salvar}"
@@ -143,6 +145,19 @@
 					</f:facet>
 				</p:cellEditor>
 	  </p:column>
+	  
+	  	 <p:column headerText="#{msg['pages.cadastroProva.tempo']}" filterBy="#{aux.tempo}">
+    
+    			<p:cellEditor>
+					<f:facet name="output">
+						<p:outputLabel value="#{aux.tempo}" />
+					</f:facet>
+					<f:facet name="input">
+						<p:inputText id="provaTempo" value="#{aux.tempo}"
+							style="width:100%" />
+					</f:facet>
+				</p:cellEditor>
+	  </p:column>
     
       <p:column headerText="#{msg['pages.cadastroProva.disciplina']}" filterBy="#{aux.disciplina}">
      
@@ -161,20 +176,6 @@
 				</p:cellEditor>
       </p:column>
       
-      <p:column headerText="#{msg['pages.cadastroProva.conteudos']}" filterBy="#{aux.conteudos}">
-    
-    			<p:cellEditor>
-					<f:facet name="output">
-						<p:outputLabel value="#{aux.conteudos}" />
-					</f:facet>
-					<f:facet name="input">
-
-						<p:inputText id="provaConteudo" value="#{aux.conteudos}"
-							style="width:100%" />
-					</f:facet>
-				</p:cellEditor>
-	  </p:column>
-      
       <p:column style="width:70px" headerText="#{msg['pages.cadastroProva.optionTable']}">
 					
 					<p:rowEditor />
@@ -184,7 +185,7 @@
 						actionListener="#{provaManagedBean.remove}"
 						update="tabelaProva" />
 						
-					<p:commandLink id="imprimir" styleClass="ui-icon ui-icon-calculator"
+					<p:commandLink id="imprimir" styleClass="ui-icon ui-icon-heart"
 						style="text-align:center"
 						actionListener="#{provaManagedBean.Imprimir(aux.id)}"
 						update="tabelaProva" />

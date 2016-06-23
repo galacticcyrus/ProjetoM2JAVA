@@ -48,7 +48,7 @@ public class ConteudoManagedBean implements Serializable{
 
 		disciplina.addConteudo(conteudo);
 		conteudo.setDisciplina(disciplina);
-
+		disciplina = disciplinaService.salvar(disciplina);
 		conteudo = contService.salvar(conteudo);
 
 		if (conteudos != null)

@@ -89,6 +89,19 @@
 				</p:cellEditor>
 	  </p:column>
 	  
+	        <p:column headerText="#{msg['pages.cadastroQuestao.qtdUsos']}">
+    
+    			<p:cellEditor>
+					<f:facet name="output">
+						<p:outputLabel value="#{questaoManagedBean.frequenciaUso}" />
+					</f:facet>
+					<f:facet name="input">
+				<p:inputText id="questaoUsos" value="#{questaoManagedBean.frequenciaUso}"
+							style="width:100%" />
+					</f:facet>
+				</p:cellEditor>
+	  </p:column>
+	  
 	        <p:column headerText="#{msg['pages.cadastroQuestao.dificuldade']}" filterBy="#{aux.dificuldade}">
     
     			<p:cellEditor>

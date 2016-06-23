@@ -39,14 +39,17 @@ public class ProvaManagedBean implements Serializable{
 	private List<Prova> provas;
 	//private List<Questao> questoes;
 	//private List<Disciplina> disciplinas;
+	private Questao questao = new Questao();
 	private List<Conteudo> conteudos;
 	private Disciplina disciplina = new Disciplina();
 	private Prova provaSelecionada = null;
 	public void salvar() {
+		prova.setQuestoes(new ArrayList<Questao>());
 		disciplina.addProva(prova);
 		prova.setDisciplina(disciplina);
 		prova.setConteudos(conteudos);
-
+		disciplina = discService.salvar(disciplina);
+		
 		prova = provaService.salvar(prova);
 
 		if (provas != null)
@@ -85,7 +88,9 @@ public class ProvaManagedBean implements Serializable{
 
 	public List<Prova> getProvas() {
 		if (provas == null)
+		{
 			provas = provaService.getProvas();
+		}
 
 		return provas;
 	}
@@ -109,8 +114,10 @@ public class ProvaManagedBean implements Serializable{
 	{
 		for(int i = 0; i<provas.size(); i++)
 		{
-			if(provas.get(i).getId() == aux)
+			if(provas.get(i).getId() == aux){
 				provas.get(i).imprimir();
+				System.out.println("Foi");
+			}
 		}		
 	}
 	
@@ -134,8 +141,10 @@ public class ProvaManagedBean implements Serializable{
 				for(int j = 0;j< sx.length; j++){
 					tipos.add(sx[j]);
 				}
-				System.out.println(sx);
-				provas.get(i).getDisciplina().geraProva(provas.get(i).getTempo(), provas.get(i).getQtdQuestoes(), provas.get(i).getDificuldade(), provas.get(i).getConteudos(), tipos, provas.get(i).getCurso(), provas.get(i).getFaculdade(), provas.get(i).getTurma(),cal.getTime());
+				System.out.println(provas.get(i).getConteudos());
+				Prova p = provas.get(i).getDisciplina().geraProva(provas.get(i).getTempo(), provas.get(i).getQtdQuestoes(), provas.get(i).getDificuldade(), provas.get(i).getConteudos(), tipos, provas.get(i).getCurso(), provas.get(i).getFaculdade(), provas.get(i).getTurma(),cal.getTime());
+				System.out.println("foi");
+				p = provaService.salvar(p);
 			}
 			}	
 	}
