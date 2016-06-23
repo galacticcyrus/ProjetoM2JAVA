@@ -142,7 +142,7 @@ public class ProvaManagedBean implements Serializable{
 					tipos.add(sx[j]);
 				}
 				System.out.println(provas.get(i).getConteudos());
-				Prova p = provas.get(i).getDisciplina().geraProva(provas.get(i).getTempo(), provas.get(i).getQtdQuestoes(), provas.get(i).getDificuldade(), provas.get(i).getConteudos(), tipos, provas.get(i).getCurso(), provas.get(i).getFaculdade(), provas.get(i).getTurma(),cal.getTime());
+				Prova p = provas.get(i).getDisciplina().geraProva(provas.get(i).getTempo(), provas.get(i).getQtdQuestoes(), provas.get(i).getDificuldade(), provas.get(i).getConteudos(), tipos, provas.get(i).getCurso(), provas.get(i).getFaculdade(), provas.get(i).getTurma(),cal.getTime(),provas.get(i).getId());
 				System.out.println("foi");
 				p = provaService.salvar(p);
 			}

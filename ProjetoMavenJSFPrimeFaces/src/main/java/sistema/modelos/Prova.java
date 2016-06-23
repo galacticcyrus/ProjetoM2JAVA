@@ -162,7 +162,9 @@ public class Prova implements Serializable{
 		
 	}
 	
-	
+	public void setId(int id){
+		this.id = id;
+	}
 		
 	public int getQtdQuestoes() {
 		return qtdQuestoes;
@@ -181,8 +183,10 @@ public class Prova implements Serializable{
 		        document.open();
 		        // step 4
 		        document.add(new Paragraph(disciplina.getNome() + " " + dataDeAplicacao));
+		        System.out.println(questoes.size());
 		        for(int i = 0; i < questoes.size(); i++)
 		        {
+		        	System.out.println(i);
 		        	if(gabarito)
 		        	{
 		        		if(questoes.get(i).resolimg != null)

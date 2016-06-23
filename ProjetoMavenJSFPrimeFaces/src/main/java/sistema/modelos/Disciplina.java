@@ -65,9 +65,10 @@ public class Disciplina implements Serializable{
 	
 	//*********************************************
 	
-	public Prova geraProva(int tempo, int qtd, int dificuldade, List<Conteudo> cons, List<String> tipos, String curso, String faculdade, String turma, Date data){
+	public Prova geraProva(int tempo, int qtd, int dificuldade, List<Conteudo> cons, List<String> tipos, String curso, String faculdade, String turma, Date data, int id){
 
 		Prova ret = new Prova();
+		ret.setId(id);
 		int c = 0, t = 0;
 		
 		for(int i = 0; i < qtd; i++)
