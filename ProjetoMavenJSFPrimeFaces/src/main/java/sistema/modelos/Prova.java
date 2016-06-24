@@ -1,6 +1,6 @@
 package sistema.modelos;
 import java.io.Serializable;
-import java.sql.Date;
+import java.util.Date;
 import java.util.Collections;
 import java.util.List;
 
@@ -16,8 +16,10 @@ import org.apache.derby.client.am.DateTime;
 import java.io.FileOutputStream;
 import java.io.IOException;
  
+
 import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.Font;
 import com.itextpdf.text.Image;
 import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.pdf.PdfWriter;
@@ -116,8 +118,14 @@ public class Prova implements Serializable{
 
 	
 	//manda o numero da questao que quer remover e procura outra questao quer nao seja igual, pra entao remover
-	public boolean trocaQuestao(int i){
+	public boolean trocaQuestao(int id){
 		//Questao q = questoes.get(i);
+		int i=-1;
+		for(int j =0;j<questoes.size();j++){
+			if(questoes.get(j).getId() == id)
+				i = j;
+		}
+		if(i!=-1){
 		if(questoes.get(i).conteudo.selecionaQuestao(questoes.get(i).dificuldade, questoes.get(i).tipoPergunta, this, false))
 		{
 			questoes.get(i).provas.remove(this);
@@ -130,13 +138,48 @@ public class Prova implements Serializable{
 			System.out.println("Não existe outra questao desse conteudo que esteja com uma dificuldade aproximada e não seja essa.");
 			return false;
 		}
+		}
+		else{
+			System.out.println("Questao nao achada com esse id!");
+			return false;
+		}
 	}
 	
 	public void addQuestao(Questao q){
 		questoes.add(q);
 	}
-	public void moverQuestao(int id1, int id2){
-		Collections.swap(questoes, id1, id2);
+	public void moverQuestaoUp(int id1){
+		int id2;		
+		try{
+		for(int i =0;i<questoes.size();i++){
+			if(questoes.get(i).getId() == id1 && questoes.get(i-1)!= null){
+				id2 = questoes.get(i-1).getId();
+				Collections.swap(questoes, i, i-1);
+				//questoes.get(i).setId(questoes.get(i-1).getId()) ;
+				//questoes.get(i-1).setId(id1); 
+			}
+		}
+		}
+		catch(Exception e){
+			System.out.println("There is no question on top of the selected");
+		}
+	}
+	public void moverQuestaoDown(int id1){
+		int id2;		
+		try{
+		for(int i =0;i<questoes.size();i++){
+			if(questoes.get(i).getId() == id1 && questoes.get(i+1)!= null){
+				id2 = questoes.get(i+1).getId();
+				Collections.swap(questoes, i, i+1);
+				//questoes.get(i).setId(questoes.get(i+1).getId()) ;
+				//questoes.get(i+1).setId(id1); 
+
+			}
+		}
+		}
+		catch(Exception e){
+			System.out.println("There is no question below the selected");
+		}
 	}
 
 	public Disciplina getDisciplina() {
@@ -157,8 +200,8 @@ public class Prova implements Serializable{
 	public void imprimir()throws DocumentException, IOException 
 	{
 	 
-		createPdf(disciplina.getNome() + " " + Turma + ".pdf", false);	
-		createPdf(disciplina.getNome() + " " + Turma + " Gabarito.pdf", true);
+		createPdf("C:/Users/111310/Desktop/java/POO-II-1Sem2016/ProjetoMavenJSFPrimeFaces/" + disciplina.getNome() + " " + Turma + ".pdf", false);	
+		createPdf("C:/Users/111310/Desktop/java/POO-II-1Sem2016/ProjetoMavenJSFPrimeFaces/" + disciplina.getNome() + " " + Turma + " Gabarito.pdf", true);
 		
 	}
 	
@@ -182,24 +225,26 @@ public class Prova implements Serializable{
 		        // step 3
 		        document.open();
 		        // step 4
-		        document.add(new Paragraph(disciplina.getNome() + " " + dataDeAplicacao));
+		        document.add((new Paragraph((disciplina.getNome()), new Font(Font.FontFamily.TIMES_ROMAN, 18, Font.BOLD))));
+		        document.add((new Paragraph(("" + dataDeAplicacao + "\n\n\n\n"), new Font(Font.FontFamily.TIMES_ROMAN, 12, Font.BOLD))));
 		        System.out.println(questoes.size());
 		        for(int i = 0; i < questoes.size(); i++)
 		        {
 		        	if(gabarito)
 		        	{
 		        		if(!questoes.get(i).resolimg.equals(""))
+		        		{
 		        			document.add(Image.getInstance(questoes.get(i).resolimg));
-		        		document.add(new Paragraph(""+(i+1)+" "+questoes.get(i).getResolucao()));
+		        		}
+		        		document.add(new Paragraph(""+(i+1)+" - "+questoes.get(i).getResolucao() + "\n\n", new Font(Font.FontFamily.TIMES_ROMAN, 10)));
 		        	}
 		        	else
 		        	{
 		        		if(!questoes.get(i).enunimg.equals(""))
 		        		{
-			        		System.out.println(questoes.get(i).enunimg);
 		        			document.add(Image.getInstance(questoes.get(i).enunimg));
 		        		}
-		        		document.add(new Paragraph(""+(i+1)+" "+questoes.get(i).getResolucao()));
+		        		document.add(new Paragraph(""+(i+1)+" "+questoes.get(i).getResolucao() + "\n\n", new Font(Font.FontFamily.TIMES_ROMAN, 10)));
 		        	}
 		        }
 		        document.add(new Paragraph("Boa prova!"));

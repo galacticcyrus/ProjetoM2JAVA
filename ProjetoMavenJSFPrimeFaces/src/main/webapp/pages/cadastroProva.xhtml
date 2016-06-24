@@ -203,7 +203,7 @@
 						update="tabelaProva" />	
 						
 
-					<p:commandLink id="provaQuestoes" styleClass="ui-icon ui-icon-arrow"
+					<p:commandLink id="mostraQuestoes" styleClass="ui-icon ui-icon-arrowthick-1-s"
 						style="text-align:center"
 						actionListener="#{provaManagedBean.getProvaQuestoes()}"
 						update="formTableQuestao" />	
@@ -220,9 +220,10 @@
 
 	<h:form id="formTableQuestao">
 		<h3><p:outputLabel value="Questions"/></h3>
-	    <p:outputLabel value="#{msg['pages.cadastroProva.disciplina']}: #{provaManagedBean.provaSelecionada.disciplina}" />
-	    <p:outputLabel value="#{msg['pages.cadastroProva.turma']}: #{provaManagedBean.provaSelecionada.turma}" />
-		<p:dataTable value="#{provaManagedBean.provaQuestoes}" var="auxq"	id="tabelaQuestao">
+	    <p:outputLabel value="#{msg['pages.cadastroProva.disciplina']}: #{provaManagedBean.provaSelecionada.disciplina.nome}" />
+	    <br/>
+	    <p:outputLabel value="#{msg['pages.cadastroProva.Turma']}: #{provaManagedBean.provaSelecionada.turma}" />
+		<p:dataTable value="#{provaManagedBean.provaQuestoes}" var="aux" id="tabelaQuestao" >
 
 			
 			<p:column headerText="#{msg['pages.cadastroProva.Questoes.enunciado']}">
@@ -232,7 +233,25 @@
 			<p:column headerText="#{msg['pages.cadastroProva.Questoes.resolucao']}">
 						<p:outputLabel value="#{aux.resolucao}" />
 			</p:column>
-
+	
+			 <p:column style="width:70px" headerText="#{msg['pages.cadastroProva.optionTable']}">
+			 
+			 			<p:commandLink id="moveQuestoesUp" styleClass="ui-icon ui-icon-arrowthick-1-n"
+						style="text-align:center"
+						actionListener="#{provaManagedBean.moverQuestaoUp(aux.id)}"
+						update="formTableQuestao" />	
+						
+					    <p:commandLink id="moveQuestoesDown" styleClass="ui-icon ui-icon-arrowthick-1-s"
+						style="text-align:center"
+						actionListener="#{provaManagedBean.moverQuestaoDown(aux.id)}"
+						update="formTableQuestao" />	
+			 
+			 			<p:commandLink id="trocaQuestoes" styleClass="ui-icon ui-icon-trash"
+						style="text-align:center"
+						actionListener="#{provaManagedBean.trocaQuestao(aux.id)}"
+						update="formTableQuestao" />	
+			 
+			 </p:column>
 
 		</p:dataTable>
 	</h:form>

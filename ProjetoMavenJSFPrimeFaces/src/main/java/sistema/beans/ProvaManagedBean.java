@@ -73,8 +73,30 @@ public class ProvaManagedBean implements Serializable{
 		this.provaSelecionada = provaSelecionada;
 	}
 
+	public void moverQuestaoUp(int id1){
+		if(provaSelecionada!= null){
+			provaSelecionada.moverQuestaoUp(id1);
+			provaSelecionada = provaService.salvar(provaSelecionada);
+	}
+	}
 
-
+	public void moverQuestaoDown(int id1){
+		if(provaSelecionada!= null){
+			provaSelecionada.moverQuestaoDown(id1);
+			provaSelecionada = provaService.salvar(provaSelecionada);
+	}
+	}
+	
+	public void trocaQuestao(int id1){
+		if(provaSelecionada!= null){
+			if(provaSelecionada.trocaQuestao(id1)){
+			provaSelecionada = provaService.salvar(provaSelecionada);
+			}
+			else
+				System.out.println("Question not found to trade with!");
+	}
+	}
+	
 	public void setDisciplina(Disciplina disciplina){
 		this.disciplina=disciplina;
 	}
@@ -97,10 +119,6 @@ public class ProvaManagedBean implements Serializable{
 		if(provaSelecionada!= null){
 			List<Questao> q =
 			 provaService.pesquisaProvaQuestao(provaSelecionada);
-			for(int i =0;i<q.size();i++){
-				System.out.println(q.get(i).getEnunciado());
-				System.out.println(q.get(i).getResolucao());
-			}
 			return q;
 		}
 		else 
